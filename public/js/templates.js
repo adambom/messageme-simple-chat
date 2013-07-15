@@ -40,7 +40,7 @@ var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<p>You are signed in as ' +
 ((__t = ( user )) == null ? '' : __t) +
-' <a href="javascript: void(0);">log out</a></p>';
+' <a class="logout" href="javascript: void(0);">log out</a></p>';
 
 }
 return __p

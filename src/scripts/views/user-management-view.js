@@ -16,12 +16,12 @@
 
 			this.usersListView.render();
 
-			this.joinRoomView = new App.views.JoinRoom({
+			this.loggedInView = new App.views.LoggedIn({
 				model: this.model,
 				el: this.$el.find('.join-room')
 			});
 
-			this.joinRoomView.render();
+			this.loggedInView.render();
 		}
 
 
