@@ -1,8 +1,8 @@
 (function (App, Backbone, _, $, undefined) {
 
-	var __super__ = Backbone.Model.prototype;
+	var __super__ = Backbone.Calculated.Model.prototype;
 
-	App.models.messageModels.AbstractMessage = Backbone.Model.extend({
+	App.models.messageModels.AbstractMessage = Backbone.Calculated.Model.extend({
 
 		defaults: function () {
 			return {

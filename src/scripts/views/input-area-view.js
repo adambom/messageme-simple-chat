@@ -25,6 +25,8 @@
 
 			var input = $input.val();
 
+			if (!input) return;
+
 			this.model.sendMessage(input);
 
 			$input.val('');

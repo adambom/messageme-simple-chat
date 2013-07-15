@@ -61,7 +61,7 @@ with (obj) {
 __p += '<blockquote>\n\t<small>' +
 ((__t = ( user.name || 'You' )) == null ? '' : __t) +
 ' said:</small>\n\t<p>' +
-((__t = ( body )) == null ? '' : __t) +
+((__t = ( parsedBody )) == null ? '' : __t) +
 '</p>\n</blockquote>\n';
 
 }
