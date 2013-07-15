@@ -1,6 +1,14 @@
 (function (App, Backbone, _, $, undefined) {
 
 	var init = function () {
+		audiojs.events.ready(function() {
+			var as = audiojs.createAll({
+				createPlayer: false
+			});
+		});
+
+		App.soundManager = new SoundManager();
+
 		var remember = localStorage.getItem('remember');
 
 		// using == on purpose

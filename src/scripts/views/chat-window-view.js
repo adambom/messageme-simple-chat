@@ -10,6 +10,7 @@
 
 		initialize: function () {
 			this.listenTo(this.model, 'change:visibleMessages', this.renderMessages);
+			this.listenTo(this.model, 'change:visibleMessages', this.playSounds);
 		},
 
 		render: function () {
@@ -44,6 +45,19 @@
 			}, this);
 
 			$chat.scrollTop($chat[0].scrollHeight);
+		},
+
+		playSounds: function () {
+			var messages = this.model.get('visibleMessages');
+			var last = _.last(messages);
+
+			if (last.cmd === 'message_new') {
+				if (last.payload.user) {
+					App.soundManager.play('incoming');
+				} else {
+					App.soundManager.play('sent');
+				}
+			}
 		}
 
 

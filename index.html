@@ -24,7 +24,11 @@
 	<div class="container-fluid">
 		<div class="row-fluid" id="main"></div>
 	</div>
-	
+
+	<div data-target="soundmanager">
+		<audio data-name="incoming" src="public/sounds/incoming.mp3" preload="auto"></audio>
+		<audio data-name="sent" src="public/sounds/sent.mp3" preload="auto"></audio>
+	</div>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="src/scripts/vendor/jquery/jquery-1.10.2.min.js"><\/script>')</script>
@@ -37,11 +41,14 @@
 
 	<script src="src/scripts/vendor/remy/storage.js"></script>
 
+	<script src="src/scripts/vendor/audiojs/audio.custom.js"></script>
+
 	<script src="src/scripts/backbone.calculated/namespace.js"></script>
 	<script src="src/scripts/backbone.calculated/model.js"></script>
 	<script src="src/scripts/backbone.calculated/tree.js"></script>
 	<script src="src/scripts/backbone.calculated/utils.js"></script>
 	
+	<script src="src/scripts/soundmanager/soundmanager.js"></script>
 
 	<script src="src/scripts/namespace.js"></script>
 	<script src="public/js/templates.js"></script>

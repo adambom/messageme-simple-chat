@@ -58,11 +58,11 @@ App["tmpl"]["message"]["messageNew"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<p><strong>' +
+__p += '<blockquote>\n<small>' +
 ((__t = ( user.name || 'You' )) == null ? '' : __t) +
-' said:</strong></p>\n<p>' +
+' said:</small>\n<p>' +
 ((__t = ( body )) == null ? '' : __t) +
-'</p>';
+'</p>\n</blockquote>\n';
 
 }
 return __p
