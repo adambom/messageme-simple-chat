@@ -14,7 +14,7 @@ module.exports = function (grunt) {
                 tasks: ['less:dev']
             },
             js: {
-                files: ['web/src/scripts/**/*.js'],
+                files: ['src/scripts/**/*.js'],
                 tasks: ['include']
             },
             templates: {
@@ -22,7 +22,7 @@ module.exports = function (grunt) {
                 tasks: ['templates:dev']
             },
             copy: {
-                files: ['web/src/scripts/vendor/**/*'],
+                files: ['src/scripts/vendor/**/*'],
                 tasks: ['copy']
             }
         },
@@ -30,9 +30,9 @@ module.exports = function (grunt) {
             all: {
                 files: [{
                     expand: true,
-                    cwd: 'web/src/scripts/vendor/',
+                    cwd: 'src/scripts/vendor/',
                     src: ['**/*.js'],
-                    dest: 'web/public/js/vendor/'
+                    dest: 'public/js/vendor/'
                 }]
             }
         },
@@ -51,6 +51,24 @@ module.exports = function (grunt) {
                 }
             }
         },
+        include: {
+            options: {
+                namespace: 'SC'
+            },
+            dev: {
+                src: [
+                    '<%= scripts.libs %>',
+                    '<%= scripts.src %>',
+                    'public/js/templates.js',
+                    '<%= scripts.models %>',
+                    '<%= scripts.views %>',
+                    '<%= scripts.factories %>',
+                    '<%= scripts.routers %>',
+                    '<%= scripts.main %>'
+                ],
+                dest: 'public/js/scripts.js'
+            }
+        },
         templates: {
             dev: {
                 options: {
@@ -67,31 +85,58 @@ module.exports = function (grunt) {
                     prettify: true
                 },
                 files: {
-                    'build/templates.js': 'web/src/templates/**/*.html'
+                    'build/templates.js': 'src/templates/**/*.html'
                 }
             }
         },
         scripts: {
             libs: [
-                'web/src/scripts/vendor/lodash/lodash-1.3.1.js',
-                'web/src/scripts/vendor/backbone/backbone-1.0.0.js'
+                'src/scripts/vendor/lodash/lodash-1.3.1.js',
+                'src/scripts/vendor/backbone/backbone-1.0.0.js',
+                'src/scripts/vendor/bootstrap/**/*.js',
+                'src/scripts/vendor/remy/storage.js',
+                'src/scripts/vendor/audiojs/audio.custom.js',
+                'src/scripts/backbone.calculated/namespace.js',
+                'src/scripts/backbone.calculated/**/*.js',
+                'src/scripts/soundmanager/soundmanager.js'
             ],
             src: [
-                'web/src/scripts/templates.js',
-                'web/src/scripts/models/cors-model.js',
-                'web/src/scripts/models/**/*.js',
-                'web/src/scripts/collections/**/*.js',
-                'web/src/scripts/views/**/*.js',
-                'web/src/scripts/routers/**/*.js',
-                'web/src/scripts/**/*.js'
+                'src/scripts/namespace.js'
+            ],
+            templates: [
+                'public/js/templates.js'
+            ],
+            models: [
+                'src/scripts/models/web-socket-model.js',
+                'src/scripts/models/message-models/abstract-message-model.js',
+                'src/scripts/models/**/*.js'
+            ],
+            views: [
+                'src/scripts/views/abstract-message-view.js',
+                'src/scripts/views/**/*.js'
+            ],
+            factories: [
+                'src/scripts/factories/factory-factory.js',
+                'src/scripts/factories/**/*.js'
+            ],
+            routers: [
+                'src/scripts/routers/**/*.js'
+            ],
+            main: [
+                'src/scripts/main.js'
             ]
         },
         concat: {
             production: {
                 src: [
                     '<%= scripts.libs %>',
+                    '<%= scripts.src %>',
                     'build/templates.js',
-                    '<%= scripts.src %>'
+                    '<%= scripts.models %>',
+                    '<%= scripts.views %>',
+                    '<%= scripts.factories %>',
+                    '<%= scripts.routers %>',
+                    '<%= scripts.main %>'
                 ],
                 dest: 'build/main.js'
             }
@@ -103,7 +148,7 @@ module.exports = function (grunt) {
             },
             production: {
                 files: {
-                    'web/public/js/main.min.js': [
+                    'public/js/main.min.js': [
                         'build/main.js'
                     ]
                 }
@@ -192,7 +237,38 @@ module.exports = function (grunt) {
 
     });
 
+    grunt.registerMultiTask('include', 'Inserts all required script tags into json file to be loaded in dev env', function () {
+        var _ = require('lodash');
+        var options = this.options({
+            separator: grunt.util.linefeed,
+            attributes: '',
+            webRoot: 'src/scripts',
+            namespace: '__include__'
+        });
+        var reRoot = new RegExp('^' + options.webRoot);
+
+        this.files.forEach(function (f) {
+            var output = f.src.filter(function (path) {
+                if (!grunt.file.exists(path)) {
+                    grunt.log.warn('Source file "' + filepath + '" not found.');
+                    return false;
+                } else {
+                    return true;
+                }
+            });
+
+            if (output.length < 1) {
+                grunt.log.warn('Destination not written because compiled files were empty.');
+            } else {
+                grunt.file.write(f.dest, 'window.__files__=' + JSON.stringify(output));
+                grunt.log.writeln('File "' + f.dest + '" created.');
+            }
+        });
+
+    });
+
+
     // Default task.
-    grunt.registerTask('default', ['templates:dev', 'less:dev', 'watch']);
+    grunt.registerTask('default', ['templates:dev', 'copy', 'include', 'less:dev', 'watch']);
     grunt.registerTask('production', ['copy', 'templates:production', 'concat', 'uglify:production', 'less:production']);
 };

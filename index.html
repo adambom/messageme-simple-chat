@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="public/css/main.css">
+    <script src="public/js/vendor/modernizr/modernizr.custom.js"></script>
 </head>
 <body>
 	<div class="navbar">
@@ -33,59 +34,43 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="src/scripts/vendor/jquery/jquery-1.10.2.min.js"><\/script>')</script>
 
-	<script src="src/scripts/vendor/lodash/lodash-1.3.1.js"></script>
-	<script src="src/scripts/vendor/backbone/backbone-1.0.0.js"></script>
+	<script>
+		(function () {
+			var query = document.location.search.slice(1).split('=');
+			var queryHash = {};
+			var files;
 
-	<script src="src/scripts/vendor/bootstrap/bootstrap-dropdown.js"></script>
-	<script src="src/scripts/vendor/bootstrap/bootstrap-slider.js"></script>
+			for (var i = 0; i < query.length; i += 2) {
+				queryHash[query[i]] = query[i + 1];
+			}
 
-	<script src="src/scripts/vendor/remy/storage.js"></script>
+			var debug = queryHash.debug === 'true'
 
-	<script src="src/scripts/vendor/audiojs/audio.custom.js"></script>
+			Modernizr.load([{
+	            load: '//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js',
+	            complete: function () {
+	                if (!window.jQuery) {
+	                    Modernizr.load('public/js/vendor/jquery/jquery-1.10.2.min.js');
+	                }
+	            }
+	        }, {
+	        	test: debug,
+	        	yep: 'public/js/scripts.js',
+	        	nope: 'js/main.min.js',
+	        	complete: function () {
+	        		Modernizr.load({
+	        			test: debug,
+	        			yep: __files__
+	        		});
+	        	}
+	        }]);
 
-	<script src="src/scripts/backbone.calculated/namespace.js"></script>
-	<script src="src/scripts/backbone.calculated/model.js"></script>
-	<script src="src/scripts/backbone.calculated/tree.js"></script>
-	<script src="src/scripts/backbone.calculated/utils.js"></script>
-	
-	<script src="src/scripts/soundmanager/soundmanager.js"></script>
+		}())
+		
 
-	<script src="src/scripts/namespace.js"></script>
-	<script src="public/js/templates.js"></script>
 
-	<!-- models -->
-	<script src="src/scripts/models/web-socket-model.js"></script>
-	<script src="src/scripts/models/room-model.js"></script>
-	<script src="src/scripts/models/message-models/abstract-message-model.js"></script>
-	<script src="src/scripts/models/message-models/message-new-model.js"></script>
-	<script src="src/scripts/models/message-models/room-join-model.js"></script>
-	<script src="src/scripts/models/message-models/user-leave-model.js"></script>
-	<script src="src/scripts/models/message-models/user-login-model.js"></script>
 
-	<!-- views -->
-	<script src="src/scripts/views/room-view.js"></script>
-	<script src="src/scripts/views/chat-window-view.js"></script>
-	<script src="src/scripts/views/user-management-view.js"></script>
-	<script src="src/scripts/views/users-list-view.js"></script>
-	<script src="src/scripts/views/logged-in-view.js"></script>
-	<script src="src/scripts/views/input-area-view.js"></script>
-	<script src="src/scripts/views/rewind-view.js"></script>
-	<script src="src/scripts/views/login-view.js"></script>
-	<script src="src/scripts/views/message-views/abstract-message-view.js"></script>
-	<script src="src/scripts/views/message-views/message-new-view.js"></script>
-	<script src="src/scripts/views/message-views/room-join-view.js"></script>
-	<script src="src/scripts/views/message-views/user-leave-view.js"></script>
-	<script src="src/scripts/views/message-views/user-login-view.js"></script>
-
-	<!-- factories -->
-	<script src="src/scripts/factories/factory-factory.js"></script>
-	<script src="src/scripts/factories/message-model-factory.js"></script>
-	<script src="src/scripts/factories/message-view-factory.js"></script>
-	<script src="src/scripts/factories/message-factory.js"></script>
-
-	<!-- routers -->
-	<script src="src/scripts/routers/main-router.js"></script>
-
-	<script src="src/scripts/main.js"></script>
+		
+	</script>
 </body>
 </html>
