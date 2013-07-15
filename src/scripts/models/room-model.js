@@ -19,9 +19,11 @@
 			},
 
 			users: {
-				dependencies: ['messages', 'shownMessageLimit'],
+				dependencies: ['messages', 'shownMessageLimit', 'user'],
 				getter: function () {
 					var messages = this.get('messages');
+					var user = this.get('user');
+					var limit = this.get('shownMessageLimit');
 
 					// Get initial room members
 					var room = _.find(messages, function (msg) {
@@ -30,7 +32,7 @@
 
 					if (!room) return [];
 
-					messages = _.first(messages, this.get('shownMessageLimit'));
+					messages = _.first(messages, limit);
 
 					room = _.sortBy(room.payload.room, function (user) {
 						return user.user_id;
@@ -48,6 +50,17 @@
 						}
 
 					});
+
+					// Handle the edge case of no shown messages
+					if (limit === 0) {
+						var indexOfMe = _.reduce(room, function (prev, u, i) {
+							return u.name === user ? i : prev;
+						}, -1);
+
+						if (indexOfMe !== -1) {
+							room.splice(indexOfMe, 1);
+						}
+					}
 
 					return room;
 				}
