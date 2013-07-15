@@ -6340,6 +6340,12 @@ code {
   height: 500px;
   overflow-y: scroll;
 }
+.chat-window blockquote small:before {
+  content: '';
+}
+.input-area .btn {
+  padding: 4px 7px;
+}
 .form-signin {
   max-width: 300px;
   padding: 19px 29px 29px;
@@ -6373,10 +6379,4 @@ li.unstyled {
 }
 .dropdown-menu.row .span12 .muted {
   color: #003f4d;
-}
-blockquote small:before {
-  content: '';
-}
-.btn {
-  padding: 4px 7px;
 }
