@@ -33,6 +33,11 @@ module.exports = function (grunt) {
                     cwd: 'src/scripts/vendor/',
                     src: ['**/*.js'],
                     dest: 'public/js/vendor/'
+                }, {
+                    expand: true,
+                    cwd: 'sounds',
+                    src: ['**/*.mp3'],
+                    dest: 'public/sounds'
                 }]
             }
         },
