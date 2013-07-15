@@ -27,6 +27,11 @@
 				el: this.$el
 			});
 
+			if (this.rewindView) {
+				this.rewindView.$el.empty();
+				delete this.rewindView;
+			}
+
 			this.view.render();
 		},
 
@@ -46,7 +51,14 @@
 				el: this.$el
 			});
 
+			this.rewindView = new App.views.Rewind({
+				model: roomModel,
+				el: $('.dropdown')
+			});
+
 			this.view.render();
+
+			this.rewindView.render();
 		}
 
 	});

@@ -105,15 +105,15 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape, __j = Array.prototype.join;
 function print() { __p += __j.call(arguments, '') }
 with (obj) {
-
+__p += '<a href="#" class="dropdown-toggle" data-toggle="dropdown">\n\tRewind Chat\n\t<b class="caret"></b>\n</a>\n<ul class="dropdown-menu row">\n\t<li class="span12">\n\t\t';
  if (totalMessages > 1) { ;
-__p += '\n\t<input type="text" class="slider span12" data-slider-step="1" data-slider-min="0" data-slider-tooltip="hide">\n';
+__p += '\n\t\t\t<input type="text" class="slider span12" data-slider-step="1" data-slider-min="0" data-slider-tooltip="hide">\n\t\t';
  } else if (totalMessages === 1) { ;
-__p += '\n\t<span class="muted">You only have 1 message.</span>\n';
+__p += '\n\t\t\t<span class="muted">You only have 1 message.</span>\n\t\t';
  } else { ;
-__p += '\n\t<span class="muted">No messages yet.</span>\n';
+__p += '\n\t\t\t<span class="muted">No messages yet.</span>\n\t\t';
  } ;
-__p += '\n';
+__p += '\n\t</li>\n</ul>\n';
 
 }
 return __p

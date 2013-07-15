@@ -22,13 +22,6 @@
 			});
 
 			this.userManagementView.render();
-
-			this.rewindView = new App.views.Rewind({
-				model: this.model,
-				el: $('.dropdown .content')
-			});
-
-			this.rewindView.render();
 		}
 
 
