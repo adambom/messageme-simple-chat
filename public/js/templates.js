@@ -151,7 +151,7 @@ App["tmpl"]["usersList"] = function(obj) {
 obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
-__p += '<h3>Users in room:</h3>\n\n<ul class="users">\n\t<li class="muted unstyled">No users yet</li>\n</ul>\n\n<div class="you"></div>';
+__p += '<h3>Users in room:</h3>\n\n<ul class="users unstyled">\n\t<li class="muted unstyled">No users yet</li>\n</ul>\n\n<div class="you"></div>';
 
 }
 return __p

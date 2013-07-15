@@ -6368,8 +6368,11 @@ li.unstyled {
   list-style-type: none;
   margin-left: -25px;
 }
-.dropdown-menu.row .content {
+.dropdown-menu.row .span12 {
   margin-right: 20px;
+}
+.dropdown-menu.row .span12 .muted {
+  color: #003f4d;
 }
 blockquote small:before {
   content: '';

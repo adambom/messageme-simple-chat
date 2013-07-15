@@ -48,6 +48,16 @@
 		},
 
 		playSounds: function () {
+			if (this.model.get('rewinding')) {
+				this.stopSounds = true;
+				return;
+			}
+
+			if (this.stopSounds) {
+				this.stopSounds = false;
+				return;
+			}
+
 			var messages = this.model.get('visibleMessages');
 			var last = _.last(messages);
 

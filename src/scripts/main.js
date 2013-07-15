@@ -9,18 +9,21 @@
 
 		App.soundManager = new SoundManager();
 
+		App.router = new App.routers.Main();
+		Backbone.history.start();
+
 		var remember = localStorage.getItem('remember');
 
-		// using == on purpose
-		if (remember == true) {
+		if (remember === 'true') {
 			App.user = localStorage.getItem('username');
+
+			if (App.user) {
+				App.router.navigate('chat', { trigger: true });
+			}
 		} else {
 			localStorage.removeItem('username');
 			App.user = undefined;
 		}
-
-		App.router = new App.routers.Main();
-		Backbone.history.start();
 	};
 
 	$(init);
