@@ -47,6 +47,12 @@
 				url: 'ws://107.22.74.86:7061/simplechat/websocket'
 			});
 
+			if (this.view) {
+				this.view.undelegateEvents();
+				this.view.stopListening();
+				delete this.view;
+			}
+
 			this.view = new App.views.Room({
 				model: App.roomModel,
 				el: this.$el
