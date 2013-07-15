@@ -1,0 +1,7 @@
+<% if (totalMessages > 1) { %>
+	<input type="text" class="slider span12" data-slider-step="1" data-slider-min="0" data-slider-tooltip="hide">
+<% } else if (totalMessages === 1) { %>
+	<span class="muted">You only have 1 message.</span>
+<% } else { %>
+	<span class="muted">No messages yet.</span>
+<% } %>

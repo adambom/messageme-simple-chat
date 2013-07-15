@@ -1,0 +1,5 @@
+web/public/css
+web/public/js
+build
+node_modules
+.DS_Store
