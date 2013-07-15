@@ -24,7 +24,8 @@
 
 		login: function () {
 			this.view = new App.views.Login({
-				el: this.$el
+				el: this.$el,
+				model: App.roomModel || new Backbone.Model()
 			});
 
 			if (this.rewindView) {
@@ -40,19 +41,19 @@
 				return this.navigate('login', { trigger: true });
 			}
 
-			var roomModel = new App.models.Room({
+			App.roomModel = new App.models.Room({
 				user: App.user
 			}, {
 				url: 'ws://107.22.74.86:7061/simplechat/websocket'
 			});
 
 			this.view = new App.views.Room({
-				model: roomModel,
+				model: App.roomModel,
 				el: this.$el
 			});
 
 			this.rewindView = new App.views.Rewind({
-				model: roomModel,
+				model: App.roomModel,
 				el: $('.dropdown')
 			});
 

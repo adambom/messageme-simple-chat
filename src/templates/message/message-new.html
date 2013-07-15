@@ -1,4 +1,4 @@
 <blockquote>
-	<small><%= user.name || 'You' %> said:</small>
+	<small><%= _.escape(user.name) || 'You' %> said:</small>
 	<p><%= parsedBody %></p>
 </blockquote>

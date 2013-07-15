@@ -59,7 +59,7 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<blockquote>\n\t<small>' +
-((__t = ( user.name || 'You' )) == null ? '' : __t) +
+((__t = ( _.escape(user.name) || 'You' )) == null ? '' : __t) +
 ' said:</small>\n\t<p>' +
 ((__t = ( parsedBody )) == null ? '' : __t) +
 '</p>\n</blockquote>\n';
@@ -72,7 +72,7 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<p class="muted">' +
-((__t = ( user.name )) == null ? '' : __t) +
+((__t = ( _.escape(user.name) )) == null ? '' : __t) +
 ' has logged in</p>\n';
 
 }
@@ -83,7 +83,7 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<p class="muted">' +
-((__t = ( user.name )) == null ? '' : __t) +
+((__t = ( _.escape(user.name) )) == null ? '' : __t) +
 ' has left the room</p>\n';
 
 }
@@ -94,7 +94,7 @@ obj || (obj = {});
 var __t, __p = '', __e = _.escape;
 with (obj) {
 __p += '<p class="muted">You have joined the room as ' +
-((__t = ( user.name )) == null ? '' : __t) +
+((__t = ( _.escape(user.name) )) == null ? '' : __t) +
 '</p>\n';
 
 }
@@ -107,7 +107,7 @@ function print() { __p += __j.call(arguments, '') }
 with (obj) {
 __p += '<a href="#" class="dropdown-toggle" data-toggle="dropdown">\n\tRewind Chat\n\t<b class="caret"></b>\n</a>\n<ul class="dropdown-menu row">\n\t<li class="span12">\n\t\t';
  if (totalMessages > 1) { ;
-__p += '\n\t\t\t<input type="text" class="slider span12" data-slider-step="1" data-slider-min="0" data-slider-tooltip="hide">\n\t\t';
+__p += '\n\t\t\t<input type="text" class="slider span12" data-slider-step="1" data-slider-min="0" data-slider-tooltip="show">\n\t\t';
  } else if (totalMessages === 1) { ;
 __p += '\n\t\t\t<span class="muted">You only have 1 message.</span>\n\t\t';
  } else { ;
